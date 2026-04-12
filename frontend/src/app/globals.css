@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global Base ─────────────────────────────────────────────────── */
+:root {
+  --gold-50: #fffbeb;
+  --gold-400: #d4a017;
+  --gold-500: #b8860b;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 160, 23, 0.25) transparent;
+}
+
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(212,160,23,0.4), rgba(212,160,23,0.1));
+  border-radius: 3px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(212,160,23,0.6), rgba(212,160,23,0.2));
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(212, 160, 23, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 80% 70%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+    #030304;
+  color: #e8e8ef;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── Selection ─────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(212, 160, 23, 0.2);
+  color: #fcd34d;
+}
+
+/* ── Focus Ring ────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(212, 160, 23, 0.5);
+  outline-offset: 2px;
+}
+
+/* ── Noise Texture Overlay ─────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ── Gold Gradient Utilities ───────────────────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fcd34d 0%, #d4a017 40%, #92650a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-chrome {
+  background: linear-gradient(135deg, #ffffff 0%, #d0d0df 40%, #a8a8c0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated Gold Shine Text ──────────────────────────────────────── */
+.text-gold-shine {
+  background: linear-gradient(105deg, #92650a 0%, #fcd34d 30%, #fbbf24 50%, #fcd34d 70%, #92650a 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShine 4s linear infinite;
+}
+
+@keyframes goldShine {
+  to { background-position: 200% center; }
+}
+
+/* ── Grid Pattern Background ───────────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(212, 160, 23, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 160, 23, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── Glow Effects ──────────────────────────────────────────────────── */
+.glow-gold {
+  box-shadow:
+    0 0 30px rgba(212, 160, 23, 0.4),
+    0 0 60px rgba(212, 160, 23, 0.15),
+    0 0 120px rgba(212, 160, 23, 0.05);
+}
+
+.glow-text-gold {
+  text-shadow:
+    0 0 20px rgba(212, 160, 23, 0.6),
+    0 0 40px rgba(212, 160, 23, 0.3);
+}
+
+/* ── Borders ───────────────────────────────────────────────────────── */
+.border-gold-subtle {
+  border-color: rgba(212, 160, 23, 0.15);
+}
+
+/* ── Section Dividers ──────────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.2) 30%, rgba(212, 160, 23, 0.2) 70%, transparent);
+}
+
+/* ── Ticker Scroll ─────────────────────────────────────────────────── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 30s linear infinite;
+}
+
+.ticker-track:hover { animation-play-state: paused; }
+
+/* ── Particle Canvas ───────────────────────────────────────────────── */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── Number input no spinners ──────────────────────────────────────── */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Compliance Badge Colors ───────────────────────────────────────── */
+.badge-esrs  { color: #00e5a0; border-color: rgba(0, 229, 160, 0.3); background: rgba(0, 229, 160, 0.05); }
+.badge-issb  { color: #00d4ff; border-color: rgba(0, 212, 255, 0.3); background: rgba(0, 212, 255, 0.05); }
+.badge-gold  { color: #fcd34d; border-color: rgba(212, 160, 23, 0.3); background: rgba(212, 160, 23, 0.05); }
+
+/* ── Transition helpers ────────────────────────────────────────────── */
+.transition-gold {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
